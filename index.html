@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundWave – Music Streaming</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ SIDEBAR ═══════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <i class="fa-solid fa-wave-square"></i>
+      <span>SoundWave</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="active" data-page="home"><i class="fa-solid fa-house"></i><span>Home</span></li>
+        <li data-page="explore"><i class="fa-solid fa-compass"></i><span>Explore</span></li>
+        <li data-page="library"><i class="fa-solid fa-layer-group"></i><span>Library</span></li>
+        <li data-page="artists"><i class="fa-solid fa-user-music"></i><span>Artists</span></li>
+        <li data-page="favorites"><i class="fa-solid fa-heart"></i><span>Favorites</span></li>
+        <li data-page="charts"><i class="fa-solid fa-chart-simple"></i><span>Charts</span></li>
+        <li data-page="stats"><i class="fa-solid fa-chart-pie"></i><span>My Stats</span></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-section-title">YOUR PLAYLISTS</div>
+    <ul class="playlist-list" id="sidebarPlaylists">
+      <li class="playlist-item active-playlist" data-playlist="0"><i class="fa-solid fa-list-music"></i> Chill Vibes</li>
+      <li class="playlist-item" data-playlist="1"><i class="fa-solid fa-list-music"></i> Workout Hits</li>
+      <li class="playlist-item" data-playlist="2"><i class="fa-solid fa-list-music"></i> Late Night Jazz</li>
+      <li class="playlist-item" data-playlist="3"><i class="fa-solid fa-list-music"></i> Focus Mode</li>
+    </ul>
+
+    <div class="sidebar-bottom">
+      <div class="user-avatar">
+        <div class="avatar-circle">AZ</div>
+        <div class="user-info">
+          <span class="user-name">Abrar Zihan</span>
+          <span class="user-plan">Premium</span>
+        </div>
+      </div>
+      <button class="sidebar-settings-btn" id="sidebarSettingsBtn" title="Settings">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════ MAIN CONTENT ══════════════════════════ -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ── TOP NAV ── -->
+    <header class="topbar">
+      <button class="hamburger" id="hamburgerBtn"><i class="fa-solid fa-bars"></i></button>
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Search songs, artists, albums…" />
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn notif-btn" id="notifBtn" title="Notifications"><i class="fa-regular fa-bell"></i><span class="notif-badge" id="notifBadge">3</span></button>
+        <button class="icon-btn" id="settingsBtn" title="Settings"><i class="fa-solid fa-gear"></i></button>
+        <div class="avatar-sm">AZ</div>
+      </div>
+    </header>
+
+    <!-- ══════════ PAGE: HOME ══════════ -->
+    <section class="page active" id="page-home">
+
+      <!-- Hero Banner -->
+      <div class="hero-banner" id="heroBanner">
+        <div class="hero-content">
+          <div class="hero-badge"><i class="fa-solid fa-fire"></i> Trending Now</div>
+          <h1 class="hero-title" id="heroTitle">Blinding Lights</h1>
+          <p class="hero-artist" id="heroArtist">The Weeknd</p>
+          <p class="hero-desc">From the album <em>After Hours</em> · 2020</p>
+          <div class="hero-actions">
+            <button class="btn-play-hero" id="heroPlayBtn"><i class="fa-solid fa-play"></i> Play Now</button>
+            <button class="btn-add-hero" id="heroLikeBtn"><i class="fa-regular fa-heart"></i> Like</button>
+          </div>
+        </div>
+        <div class="hero-art" id="heroArt">
+          <div class="hero-disc" id="heroDisc">
+            <div class="disc-center"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mood Section -->
+      <section class="content-section mood-section">
+        <div class="section-header"><h2>🎭 How are you feeling?</h2></div>
+        <div class="mood-grid" id="moodGrid"></div>
+      </section>
+
+      <!-- Featured Section -->
+      <section class="content-section">
+        <div class="section-header">
+          <h2>🔥 Featured Albums</h2>
+          <a href="#" class="see-all">See All</a>
+        </div>
+        <div class="cards-grid" id="albumsGrid"></div>
+      </section>
+
+      <!-- Trending Artists -->
+      <section class="content-section">
+        <div class="section-header">
+          <h2>🎤 Trending Artists</h2>
+          <a href="#" class="see-all">See All</a>
+        </div>
+        <div class="artists-row" id="trendingArtists"></div>
+      </section>
+
+      <!-- Curated Playlists -->
+      <section class="content-section">
+        <div class="section-header">
+          <h2>🎵 Curated Playlists</h2>
+          <a href="#" class="see-all">See All</a>
+        </div>
+        <div class="cards-grid playlists-grid" id="playlistsGrid"></div>
+      </section>
+
+      <!-- Recently Played -->
+      <section class="content-section">
+        <div class="section-header">
+          <h2>🕒 Recently Played</h2>
+        </div>
+        <div class="track-list" id="recentlyPlayed"></div>
+      </section>
+
+    </section><!-- end #page-home -->
+
+    <!-- ══════════ PAGE: EXPLORE ══════════ -->
+    <section class="page" id="page-explore">
+      <h1 class="page-title">Explore</h1>
+      <div class="genre-grid" id="genreGrid"></div>
+      <div class="content-section" style="margin-top:2rem;">
+        <div class="section-header"><h2>🌍 New Releases</h2></div>
+        <div class="cards-grid" id="newReleasesGrid"></div>
+      </div>
+    </section>
+
+    <!-- ══════════ PAGE: LIBRARY ══════════ -->
+    <section class="page" id="page-library">
+      <h1 class="page-title">Your Library</h1>
+      <div class="library-tabs">
+        <button class="lib-tab active" data-tab="playlists">Playlists</button>
+        <button class="lib-tab" data-tab="albums">Albums</button>
+        <button class="lib-tab" data-tab="songs">Songs</button>
+      </div>
+      <div class="library-content" id="libraryContent"></div>
+    </section>
+
+    <!-- ══════════ PAGE: ARTISTS ══════════ -->
+    <section class="page" id="page-artists">
+      <h1 class="page-title">Artists</h1>
+      <div class="artists-grid" id="artistsGrid"></div>
+    </section>
+
+    <!-- ══════════ PAGE: FAVORITES ══════════ -->
+    <section class="page" id="page-favorites">
+      <h1 class="page-title">❤️ Your Favorites</h1>
+      <div class="track-list" id="favoritesList"></div>
+      <div class="empty-state" id="favEmptyState" style="display:none;">
+        <i class="fa-regular fa-heart fa-3x"></i>
+        <p>No favorites yet. Like a song to see it here!</p>
+      </div>
+    </section>
+
+    <!-- ══════════ PAGE: CHARTS ══════════ -->
+    <section class="page" id="page-charts">
+      <h1 class="page-title">🏆 Charts</h1>
+      <div class="charts-tabs">
+        <button class="chart-tab active" data-chart="global">Global</button>
+        <button class="chart-tab" data-chart="trending">Trending</button>
+        <button class="chart-tab" data-chart="viral">Viral</button>
+      </div>
+      <div class="charts-track-list" id="chartsTrackList"></div>
+    </section>
+
+    <!-- ══════════ PAGE: MY STATS ══════════ -->
+    <section class="page" id="page-stats">
+      <h1 class="page-title">📊 My Stats</h1>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="stat-info">
+            <span class="stat-value" id="statMinutes">0</span>
+            <span class="stat-label">Minutes Listened</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-music"></i></div>
+          <div class="stat-info">
+            <span class="stat-value" id="statTracks">0</span>
+            <span class="stat-label">Tracks Played</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-star"></i></div>
+          <div class="stat-info">
+            <span class="stat-value" id="statFavArtist">—</span>
+            <span class="stat-label">Favorite Artist</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-tag"></i></div>
+          <div class="stat-info">
+            <span class="stat-value" id="statTopGenre">—</span>
+            <span class="stat-label">Top Genre</span>
+          </div>
+        </div>
+      </div>
+      <div class="stats-charts-row">
+        <div class="stats-chart-box">
+          <h3>Weekly Listening</h3>
+          <canvas id="weeklyCanvas"></canvas>
+        </div>
+        <div class="stats-chart-box">
+          <h3>Genre Breakdown</h3>
+          <canvas id="genreCanvas"></canvas>
+        </div>
+      </div>
+      <div class="stats-top-section">
+        <div class="stats-top-col">
+          <h3>Top Tracks</h3>
+          <div class="top-tracks-list" id="statsTopTracks"></div>
+        </div>
+        <div class="stats-top-col">
+          <h3>Top Artists</h3>
+          <div class="top-artists-list" id="statsTopArtists"></div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- end .main-content -->
+
+  <!-- ═══════════════════ PERSISTENT AUDIO PLAYER BAR ════════════════════ -->
+  <div class="player-bar" id="playerBar">
+
+    <!-- Track Info -->
+    <div class="player-track">
+      <div class="player-thumb" id="playerThumb">
+        <i class="fa-solid fa-music"></i>
+      </div>
+      <div class="player-meta">
+        <span class="player-title" id="playerTitle">No track selected</span>
+        <span class="player-artist" id="playerArtist">—</span>
+      </div>
+      <button class="player-fav-btn" id="playerFavBtn" title="Favorite">
+        <i class="fa-regular fa-heart"></i>
+      </button>
+    </div>
+
+    <!-- Controls + Progress + Waveform -->
+    <div class="player-center">
+      <div class="player-controls">
+        <button class="ctrl-btn" id="shuffleBtn" title="Shuffle"><i class="fa-solid fa-shuffle"></i></button>
+        <button class="ctrl-btn" id="prevBtn" title="Previous"><i class="fa-solid fa-backward-step"></i></button>
+        <button class="ctrl-btn play-pause-btn" id="playPauseBtn" title="Play/Pause">
+          <i class="fa-solid fa-play" id="playIcon"></i>
+        </button>
+        <button class="ctrl-btn" id="nextBtn" title="Next"><i class="fa-solid fa-forward-step"></i></button>
+        <button class="ctrl-btn" id="repeatBtn" title="Repeat"><i class="fa-solid fa-repeat"></i></button>
+      </div>
+
+      <!-- Waveform Canvas -->
+      <div class="waveform-container">
+        <canvas id="waveformCanvas" width="400" height="40"></canvas>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <span class="time" id="currentTime">0:00</span>
+        <div class="progress-bar-wrap" id="progressBarWrap">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressFill"></div>
+            <div class="progress-thumb" id="progressThumb"></div>
+          </div>
+        </div>
+        <span class="time" id="totalTime">0:00</span>
+      </div>
+    </div>
+
+    <!-- Volume + Extra -->
+    <div class="player-right">
+      <button class="ctrl-btn" id="queueBtn" title="Queue"><i class="fa-solid fa-list"></i></button>
+      <button class="ctrl-btn" id="muteBtn" title="Mute"><i class="fa-solid fa-volume-high" id="volIcon"></i></button>
+      <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01" value="0.8" />
+      <button class="ctrl-btn" id="fullscreenBtn" title="Expand"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
+    </div>
+
+  </div><!-- end .player-bar -->
+
+  <!-- ═══════════════════ QUEUE PANEL ════════════════════ -->
+  <div class="queue-panel" id="queuePanel">
+    <div class="queue-header">
+      <h3>Queue</h3>
+      <button id="closeQueue"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="queue-list" id="queueList"></div>
+  </div>
+
+  <!-- ═══════════════════ FULLSCREEN PLAYER OVERLAY ═══════════════════════ -->
+  <div class="fullscreen-player" id="fullscreenPlayer">
+    <button class="fs-close" id="fsClose"><i class="fa-solid fa-chevron-down"></i></button>
+    <div class="fs-bg" id="fsBg"></div>
+    <div class="fs-content">
+      <div class="fs-art" id="fsArt">
+        <div class="fs-disc" id="fsDisc"><div class="disc-center"></div></div>
+      </div>
+      <div class="fs-info">
+        <div class="fs-track-info">
+          <h2 id="fsTitle">—</h2>
+          <p id="fsArtist">—</p>
+          <p id="fsAlbum">—</p>
+        </div>
+        <canvas id="fsWaveform" width="600" height="80"></canvas>
+        <div class="fs-controls">
+          <button class="ctrl-btn" id="fsShuffleBtn"><i class="fa-solid fa-shuffle"></i></button>
+          <button class="ctrl-btn" id="fsPrevBtn"><i class="fa-solid fa-backward-step"></i></button>
+          <button class="ctrl-btn play-pause-btn" id="fsPlayBtn"><i class="fa-solid fa-play" id="fsPlayIcon"></i></button>
+          <button class="ctrl-btn" id="fsNextBtn"><i class="fa-solid fa-forward-step"></i></button>
+          <button class="ctrl-btn" id="fsRepeatBtn"><i class="fa-solid fa-repeat"></i></button>
+        </div>
+        <div class="progress-container fs-progress">
+          <span class="time" id="fsCurrentTime">0:00</span>
+          <div class="progress-bar-wrap" id="fsProgressWrap">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="fsProgressFill"></div>
+              <div class="progress-thumb" id="fsProgressThumb"></div>
+            </div>
+          </div>
+          <span class="time" id="fsTotalTime">0:00</span>
+        </div>
+        <div class="fs-volume">
+          <i class="fa-solid fa-volume-low"></i>
+          <input type="range" id="fsVolumeSlider" class="volume-slider" min="0" max="1" step="0.01" value="0.8" />
+          <i class="fa-solid fa-volume-high"></i>
+        </div>
+      </div>
+      <button class="ctrl-btn lyrics-toggle-btn" id="lyricsToggleBtn" title="Lyrics"><i class="fa-solid fa-microphone-lines"></i> Lyrics</button>
+      <div class="lyrics-panel" id="lyricsPanel">
+        <div class="lyrics-content" id="lyricsContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Audio Element -->
+  <audio id="audioPlayer" preload="metadata"></audio>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ═══════════════════ SETTINGS MODAL ═══════════════════════ -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal settings-modal">
+      <div class="modal-header"><h2><i class="fa-solid fa-gear"></i> Settings</h2><button class="modal-close" id="closeSettings"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="modal-body">
+        <!-- Theme Section -->
+        <div class="settings-section">
+          <h3>Appearance</h3>
+          <div class="settings-row"><span>Theme</span><div class="theme-toggle" id="themeToggle"><button class="theme-opt active" data-theme="dark"><i class="fa-solid fa-moon"></i> Dark</button><button class="theme-opt" data-theme="light"><i class="fa-solid fa-sun"></i> Light</button></div></div>
+          <div class="settings-row"><span>Accent Color</span><div class="color-swatches" id="colorSwatches"><button class="swatch active" data-color="purple" style="background:#7c3aed"></button><button class="swatch" data-color="blue" style="background:#2563eb"></button><button class="swatch" data-color="pink" style="background:#db2777"></button><button class="swatch" data-color="green" style="background:#16a34a"></button><button class="swatch" data-color="orange" style="background:#ea580c"></button><button class="swatch" data-color="cyan" style="background:#0891b2"></button></div></div>
+        </div>
+        <!-- Playback Section -->
+        <div class="settings-section">
+          <h3>Playback</h3>
+          <div class="settings-row"><span>Crossfade <span class="settings-val" id="crossfadeVal">0s</span></span><input type="range" id="crossfadeSlider" min="0" max="12" step="1" value="0" class="settings-slider" /></div>
+          <div class="settings-row"><span>Playback Speed <span class="settings-val" id="speedVal">1×</span></span><input type="range" id="speedSlider" min="0.5" max="2" step="0.25" value="1" class="settings-slider" /></div>
+          <div class="settings-row toggle-row"><span>Autoplay</span><label class="toggle-switch"><input type="checkbox" id="autoplayToggle" checked /><span class="toggle-track"></span></label></div>
+          <div class="settings-row toggle-row"><span>Normalize Volume</span><label class="toggle-switch"><input type="checkbox" id="normalizeToggle" /><span class="toggle-track"></span></label></div>
+        </div>
+        <!-- Equalizer -->
+        <div class="settings-section">
+          <h3>Equalizer</h3>
+          <div class="eq-presets" id="eqPresets"><button class="eq-preset active" data-preset="flat">Flat</button><button class="eq-preset" data-preset="bass">Bass Boost</button><button class="eq-preset" data-preset="treble">Treble</button><button class="eq-preset" data-preset="vocal">Vocal</button><button class="eq-preset" data-preset="rock">Rock</button></div>
+          <div class="eq-sliders" id="eqSliders">
+            <!-- JS will fill these in -->
+          </div>
+        </div>
+        <!-- Sleep Timer -->
+        <div class="settings-section">
+          <h3>Sleep Timer</h3>
+          <div class="sleep-timer-btns" id="sleepTimerBtns">
+            <button class="sleep-btn" data-min="15">15 min</button><button class="sleep-btn" data-min="30">30 min</button><button class="sleep-btn" data-min="45">45 min</button><button class="sleep-btn" data-min="60">60 min</button><button class="sleep-btn" data-min="0">Off</button>
+          </div>
+          <div class="sleep-status" id="sleepStatus" style="display:none"><i class="fa-solid fa-moon"></i> <span id="sleepCountdown"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ NOTIFICATIONS PANEL ═══════════════════════ -->
+  <div class="notif-panel" id="notifPanel">
+    <div class="notif-header"><h3>Notifications</h3><div style="display:flex;gap:8px"><button id="markAllRead" style="font-size:0.75rem;color:var(--accent-light);background:none;border:none;cursor:pointer">Mark all read</button><button id="closeNotif"><i class="fa-solid fa-xmark"></i></button></div></div>
+    <div class="notif-list" id="notifList"></div>
+  </div>
+
+  <!-- ═══════════════════ CONTEXT MENU ═══════════════════════ -->
+  <div class="context-menu" id="contextMenu">
+    <div class="ctx-item" id="ctxPlay"><i class="fa-solid fa-play"></i> Play Now</div>
+    <div class="ctx-item" id="ctxQueue"><i class="fa-solid fa-list-plus"></i> Add to Queue</div>
+    <div class="ctx-item" id="ctxLike"><i class="fa-regular fa-heart"></i> Add to Favorites</div>
+    <div class="ctx-divider"></div>
+    <div class="ctx-item" id="ctxPlaylist"><i class="fa-solid fa-list-music"></i> Add to Playlist</div>
+    <div class="ctx-item" id="ctxShare"><i class="fa-solid fa-share-nodes"></i> Share</div>
+    <div class="ctx-item" id="ctxInfo"><i class="fa-solid fa-circle-info"></i> Song Info</div>
+  </div>
+
+  <!-- ═══════════════════ SONG INFO MODAL ═══════════════════════ -->
+  <div class="modal-overlay" id="songInfoModal">
+    <div class="modal song-info-modal">
+      <div class="modal-header"><h2>Song Info</h2><button class="modal-close" id="closeSongInfo"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="modal-body" id="songInfoBody"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/features.js"></script>
+</body>
+</html>
